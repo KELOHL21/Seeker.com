@@ -7,6 +7,7 @@ import Button from './Button';
 const ProfilePopup = () => {
 
   let navigate = useNavigate();
+
   const [currentUser, setCurrentUser] = useState({});
   useMemo(() => {
     getCurrentUsers(setCurrentUser);
@@ -25,10 +26,11 @@ const ProfilePopup = () => {
           })
         }
       > Profile </button>
-         <li onClick={Logout}>
-            Logout
-         </li>
+        
       </ul> */}
+       <button onClick={Logout}>
+            Logout
+         </button>
     </div>
   )
 }

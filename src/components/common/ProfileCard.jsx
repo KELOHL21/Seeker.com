@@ -28,7 +28,7 @@ const ProfileCard = ({currentUser, onEdit}) => {
         <button >Edit</button>
       </div>
       <div className='mt-[0.5rem]'>
-          <h3 className='text-left text-lg -mt-5 text-gray-900 font-bold'>
+          <h3 className='-mt-5 text-lg font-bold text-left text-gray-900'>
             {/* Checking whether the profile that is displayed is === 0 if so current user is displayed if not the the current profile clicked will be displayed */}
             {Object.values(currentProfile).length === 0
             ? currentUser.name
@@ -41,7 +41,7 @@ const ProfileCard = ({currentUser, onEdit}) => {
             </p>
             <div className='flex flex-row justify-between'>
             <div>
-            <p className='text-left text-base  text-gray-700 w-[280px] leading-5 tracking-wide mt-2'>
+            <p className='text-left text-base  text-gray-700 w-[250px] leading-5 tracking-wide mt-2'>
             {Object.values(currentProfile).length === 0 
             ? currentUser.headline
             : currentProfile?.headline}  
@@ -51,13 +51,13 @@ const ProfileCard = ({currentUser, onEdit}) => {
             : currentProfile?.location}
             </p>
             </div>
-            <div className=" mr-[-0.3rem]">
+            <div className=" mr-[-6rem]">
                 <p className='text-left pt-2  text-gray-700 mb-[-0.5rem] text-sm font-semibold leading-5 tracking-wide'>
                 {Object.values(currentProfile).length === 0 
                 ? currentUser.company
                 : currentProfile?.company}
                 </p>
-                <p className='text-left text-sm pt-3  text-gray-700 font-semibold leading-5 tracking-wide'>
+                <p className='pt-3 text-sm font-semibold leading-5 tracking-wide text-left text-gray-700'>
                 {Object.values(currentProfile).length === 0 
                 ? currentUser.education
                 : currentProfile?.education}

@@ -41,8 +41,8 @@ const ProfileCard = ({currentUser, onEdit}) => {
                 : currentProfile?.email}
                 </p>
             <div className='flex flex-row justify-center'>
-            <div className=''>
-                <p className='text-left text-base  text-gray-700 w-[250px] leading-5 tracking-wide mt-2 '>
+            <div className='ml-[-2rem]'>
+                <p className='text-left text-base  text-gray-700 w-[250px] leading-5 tracking-wide mt-2'>
                 {Object.values(currentProfile).length === 0 
                 ? currentUser.headline
                 : currentProfile?.headline}  
@@ -52,6 +52,21 @@ const ProfileCard = ({currentUser, onEdit}) => {
                     ? currentUser.location
                     : currentProfile?.location}
                 </p>
+                <div className='mt-[-0.5rem] ml-[-6.5rem]'>
+                  <a className='text-left text-xs text-blue-700 w-auto leading-5 tracking-wide font-semibold hover:text-black' 
+                  href={
+                    Object.values(currentProfile).length === 0 
+                      ? currentUser.website
+                      : currentProfile?.website
+                      }
+                      target='_blank'>
+                        {
+                    Object.values(currentProfile).length === 0 
+                      ? currentUser.website
+                      : currentProfile?.website
+                      }
+                  </a>
+                </div>
             </div>
             <div className="ml-[-4rem]">
                 <p className='text-left pt-2  text-gray-700 mb-[-0.5rem] text-sm font-semibold leading-5 tracking-wide'>

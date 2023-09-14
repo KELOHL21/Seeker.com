@@ -1,8 +1,8 @@
 import React, {useState, useMemo} from 'react';
-import { Logout } from '../../api/AuthApi';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUsers } from '../../api/FirestoreApis';
 import Button from './Button';
+import { Logout } from '../../api/AuthApi';
 
 const ProfilePopup = () => {
 
@@ -29,10 +29,10 @@ const ProfilePopup = () => {
       />
       <Button
         title="Logout"
-        onClick={Logout}
+        onClick={() => Logout()}
       />
     </div>
   )
 }
 
-export default ProfilePopup
+export default ProfilePopup;

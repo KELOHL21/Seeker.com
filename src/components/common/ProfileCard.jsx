@@ -24,36 +24,53 @@ const ProfileCard = ({currentUser, onEdit}) => {
   }, []);
 
   return (
-    <div className="h-[23vh] bg-white w-[100%] align-middle mt-[20px] rounded-sm items-center p-6 ">
+    <div>
 
-      <HiOutlinePencil className='absolute right-[2.54rem] mt-[-0.4rem] hover:text-gray-500 cursor-pointer ' onClick={onEdit} size={22}/>
 
-      <div className='mt-[0.5rem]'>
-            <h3 className='-mt-5 text-lg font-bold text-left text-gray-900'>
-              {/* Checking whether the profile that is displayed is === 0 if so current user is displayed if not the the current profile clicked will be displayed */}
-              {Object.values(currentProfile).length === 0
-              ? currentUser.name
-              : currentProfile?.name}
-              </h3>
+    <div className="bg-slate-100 h-auto max-w-[1200px] m-auto rounded-sm">
+       
+       <div className='flex flex-row items-center justify-between  w-[100%]  p-2 rounded-sm'>
+
+          {/* Left side */}
+          <div className='text-left'>
+
+            <div className='flex flex-row items-center'>
+               {/* Name */}
+                <h3 className='text-[18px] font-bold text-left text-gray-900'>
+                  {/* Checking whether the profile that is displayed is === 0 if so current user is displayed if not the the current profile clicked will be displayed */}
+                  {Object.values(currentProfile).length === 0
+                  ? currentUser.name
+                  : currentProfile?.name}
+                </h3>
+
+                <div>
+                  <HiOutlinePencil className='absolute right-[2.54rem] -mt-[1rem] hover:text-gray-500 cursor-pointer border-2' onClick={onEdit} size={25}/>
+              </div>
+            </div>
+               
+
+                {/* email */}
                 <p className='text-left text-[12px] text-gray-700 tracking-wide -mt-2'>
                 {Object.values(currentProfile).length === 0 
                 ? currentUser.email
                 : currentProfile?.email}
                 </p>
-            <div className='flex flex-row justify-center'>
-            <div className='ml-[-2rem]'>
-                <p className='text-left text-base  text-gray-700 w-[250px] leading-5 tracking-wide mt-2'>
+
+                {/* Headline */}
+                <p className='text-left text-[13px] text-gray-700 w-[280px] leading-5 tracking-wide mt-[-0.5rem] font-semibold'>
                 {Object.values(currentProfile).length === 0 
                 ? currentUser.headline
                 : currentProfile?.headline}  
                 </p>
-                <p className='text-left text-sm pt-3 text-gray-700 w-[350px] leading-5 tracking-wide font-semibold'>
-                    {Object.values(currentProfile).length === 0 
-                    ? currentUser.location
-                    : currentProfile?.location}
+
+                {/* Website */}
+                <div className=''>
+                  <p className='text-left pt-2  text-gray-700  text-sm leading-5 tracking-wide'>
+                  {Object.values(currentProfile).length === 0 
+                  ? currentUser.location
+                  : currentProfile?.location}
                 </p>
-                <div className='mt-[-0.5rem] ml-[-6.5rem]'>
-                  <a className='text-left text-xs text-blue-700 w-auto leading-5 tracking-wide font-semibold hover:text-black' 
+                  <a className='text-left text-xs text-blue-700  tracking-wide font-semibold hover:text-black underline' 
                   href={
                     Object.values(currentProfile).length === 0 
                       ? currentUser.website
@@ -67,33 +84,65 @@ const ProfileCard = ({currentUser, onEdit}) => {
                       }
                   </a>
                 </div>
-            </div>
-            <div className="ml-[-4rem]">
-                <p className='text-left pt-2  text-gray-700 mb-[-0.5rem] text-sm font-semibold leading-5 tracking-wide'>
+          </div>
+
+          {/*Right Side Country & education */}
+          <div>
+               <p className='text-left pt-2  text-gray-700 mt-5 text-sm font-semibold leading-5 tracking-wide'>
                   {Object.values(currentProfile).length === 0 
                   ? currentUser.company
                   : currentProfile?.company}
                 </p>
-                <p className='pt-3 text-sm font-semibold leading-5 tracking-wide text-left text-gray-700'>
+                <p className=' text-sm font-semibold leading-5 tracking-wide text-left text-gray-700'>
                   {Object.values(currentProfile).length === 0 
                   ? currentUser.education
                   : currentProfile?.education}
                 </p>
-            </div>
           </div>
+          
+       </div>
+      
+        {/*  About */}
+        <div>
+        <p className='text-left text-[15px] pl-[10px] leading-tight tracking-wide'>
+                  {Object.values(currentProfile).length === 0 
+                  ? currentUser.aboutMe
+                  : currentProfile?.aboutMe}
+        </p>
+       </div>
+
+        {/*  Skills */}
+        <div>
+        <p className='text-left text-[15px] pl-[10px] leading-tight p-2 tracking-wide'>
+
+                  <span className='font-bold'>Skills: </span> 
+                  
+                  {Object.values(currentProfile).length === 0 
+                  ? currentUser.skills
+                  : currentProfile?.skills}
+        </p>
+       </div>
+      
+    </div>
+    
+      <div className='mt-[0.5rem] rounded-sm w-[400px] m-auto'>
+                  {allStatus?.map((posts) => {
+                            return (
+                              <div key={posts.id}>
+                                <PostCard posts={posts} />
+                              </div>
+                            );
+                          })}
       </div>
 
-      <div className='mt-[5rem]'>
-        {allStatus?.map((posts) => {
-                  return (
-                    <div key={posts.id}>
-                      <PostCard posts={posts} />
-                    </div>
-                  );
-                })}
-      </div>
-    </div>
+        </div>
   )
 }
 
-export default ProfileCard
+export default ProfileCard 
+
+
+
+
+
+

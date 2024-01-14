@@ -24,11 +24,11 @@ const UpdatePost = ({ currentUser }) => {
       await setStatus("");
       await setModalOpen(false);
   }
+
+
   useMemo(() => {
     getStatus(setAllStatus);
   }, []);
-
-  // console.log(currentUser.name);
 
   return (
     <div>

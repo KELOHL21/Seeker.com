@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { editProfile } from '../../api/FirestoreApis';
 import { HiOutlinePencil } from  'react-icons/hi';
+import { IoMdClose } from "react-icons/io";
 
 const EditBtn = ({onEdit, currentUser }) => {
 
@@ -19,9 +20,9 @@ const EditBtn = ({onEdit, currentUser }) => {
    }
 
   return (
-   <div className='h-full w-full bg-gray-300 p-5 text-2xl'>
+   <div className='h-full bg-gray-300 p-5 text-2xl'>
     <div className="h-[100vh] bg-white w-[100%] align-middle mt-[30px] rounded-sm items-center p-4">
-    <HiOutlinePencil  className='absolute right-[2.54rem] mt-[-0.4rem] hover:text-slate-700 cursor-pointer' onClick={onEdit} size={22}/>
+    <IoMdClose  className='absolute right-[2.54rem] mt-[-0.4rem] hover:text-slate-700 cursor-pointer' onClick={onEdit} size={22}/>
       <div className='flex flex-col justify-center'>
          <div className='my-[5px] '>
             <label className='text-left lg:ml-[1rem] text-sm tracking-wide font-semibold'>Full Name</label>

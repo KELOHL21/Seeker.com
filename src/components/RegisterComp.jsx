@@ -8,9 +8,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { getUuid } from '../helper/getUuid';
 
-
-
-
 const RegisterComp = () => {
 
   let navigate = useNavigate();

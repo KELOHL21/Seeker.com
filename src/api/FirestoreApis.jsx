@@ -1,9 +1,10 @@
 import { firestore } from '../firebaseConfig';
-import { addDoc, collection, onSnapshot, doc, updateDoc, query,where} from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, doc, updateDoc, query,where, setDoc} from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
 let dbRef = collection(firestore, 'posts');
 let userRef = collection(firestore, 'users');
+let likeRef = collection(firestore,'likes')
 
 export const PostStatus = (object) =>{
 
@@ -31,6 +32,7 @@ export const postuserData = (object) => {
    });
 }
 
+// Fitlering data to get current user
 export const getCurrentUsers = (setCurrentUser) => {
    onSnapshot(userRef,(response) => {
       setCurrentUser(response.docs.map((docs) => {
@@ -60,7 +62,7 @@ export const editProfile = (userID, payload) => {
 
 export  const getSinglePost = (setAllStatus, id) => {
    // Making sure the the ids are the same so that the posts can be filtered out when the usersName  is clicked and displayed
-      const singlePostQuery = query(dbRef, where('userID', '==', id));
+      const singlePostQuery = query(dbRef, where("userID", "==", id));
       onSnapshot(singlePostQuery, (response) => {
          setAllStatus(
             response.docs.map((docs) => {
@@ -81,3 +83,17 @@ export  const getSingleUser = (setCurrentUser, email) => {
          );
       });
 };
+
+export const likePost = (userId, postId) => {
+   try {
+     // sets doc using unique id
+     let docLike = doc(likeRef, `${userId}_${postId}`);
+     setDoc(docLike, {
+       userId: userId,
+       postId: postId
+     });
+     console.log(postId);
+   } catch (err) {
+     return err;
+   }
+ };

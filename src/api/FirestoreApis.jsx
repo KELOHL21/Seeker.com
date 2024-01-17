@@ -1,10 +1,11 @@
 import { firestore } from '../firebaseConfig';
-import { addDoc, collection, onSnapshot, doc, updateDoc, query,where, setDoc} from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, doc, updateDoc, query,where, setDoc, deleteDoc} from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
 let dbRef = collection(firestore, 'posts');
 let userRef = collection(firestore, 'users');
-let likeRef = collection(firestore,'likes')
+let likeRef = collection(firestore,'likes');
+let commentRef =collection(firestore, 'comments')
 
 export const PostStatus = (object) =>{
 
@@ -84,16 +85,72 @@ export  const getSingleUser = (setCurrentUser, email) => {
       });
 };
 
-export const likePost = (userId, postId) => {
+export const likePost = (userId, postId, liked) => {
    try {
-     // sets doc using unique id
-     let docLike = doc(likeRef, `${userId}_${postId}`);
-     setDoc(docLike, {
-       userId: userId,
-       postId: postId
-     });
-     console.log(postId);
+       // sets doc using a unique id
+       let docLike = doc(likeRef, `${userId}_${postId}`);
+       if (liked) {
+           deleteDoc(docLike);
+       } else {
+           setDoc(docLike, {
+               userId: userId,
+               postId: postId
+           });
+       }
    } catch (err) {
-     return err;
+       console.log(err);
    }
- };
+};
+ 
+ export const getLikesByUser = (userId,postId, setLiked, setLikesCount) => {
+   try {
+
+      // Matching the two postIds for a accurate
+    let likesQuery= query(likeRef, where("postId", "==" , postId))
+
+    onSnapshot(likesQuery, (response) => {
+      // likes now contains all ur liked post data from firebase
+      let likes = response.docs.map((doc) => doc.data());
+      let likesCount = likes?.length;
+
+      // Determining which post was liked by which user
+      const isLiked = likes.some((like) => like.userId === userId); 
+
+      setLikesCount(likesCount);
+      setLiked(isLiked);
+    })
+    } catch (err) {
+      console.log(err) ;
+    }
+ }
+
+ export const postComment = (postId, comment, timeStamp) => {
+   try {
+      addDoc(commentRef,{
+         postId,
+         comment,
+         timeStamp
+      })
+   } catch (err) {
+      console.log(err)
+   }
+ }
+
+ export const getComments = (postId) => {
+   try {
+      let singlePostQuery = query(commentRef, where('postId', '===' ,postId));
+      onSnapshot(singlePostQuery, (response)=> {
+         const comments = response.docs.map((doc) => {
+            return{
+               id:doc.id,
+               // Spreading the data from the doc
+               ...doc.data,
+            }
+         })
+
+         console.log(comments)
+      });
+   } catch (err) {
+      console.log(err)
+   }
+ }

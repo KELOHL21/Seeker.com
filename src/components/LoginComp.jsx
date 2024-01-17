@@ -41,9 +41,9 @@ const LoginComp = () => {
 
     <div>
 
-      <img src={seekerLogo} className='h-[6rem] ml-[-1.5rem] mt-[-1.5rem]'/>
+      <img src={seekerLogo} className='h-[6rem] ml-[-1.5rem] '/>
 
-      <div className='flex flex-col md:grid md:grid-cols-2 md:justify-center md:mt-[6rem]'>
+      <div className='flex flex-col md:grid md:grid-cols-2 md:justify-center md:mt-[0.5rem]'>
 
           <div>
 
@@ -85,15 +85,7 @@ const LoginComp = () => {
 
               <div className='flex flex-col'>
 
-                <div className='border-2 rounded-full text-center py-3 border-slate-800 mx-5 flex flex-row justify-center text-lg font-semibold text-gray-600 cursor-pointer hover:bg-slate-100' onClick={signwithGoogle}>
-
-                 <img src={googleLogo} className='h-7 items-center px-2'/> 
-                 
-                 Sign in with Google
-
-                </div>
-
-                <div className='border-2 rounded-full text-center py-3 my-5 border-slate-800 mx-5 text-lg font-semibold text-gray-600 cursor-pointer hover:bg-slate-100' onClick = {
+                <div className='border-2 rounded-full text-center py-3 my-1 border-slate-800 mx-5 text-lg font-semibold text-gray-600 cursor-pointer hover:bg-slate-100' onClick = {
                   () => navigate("/register")
                 }>
 

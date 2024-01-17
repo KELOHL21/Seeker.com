@@ -30,6 +30,7 @@ const PostCard = ({ posts, id, }) => {
 
     </div>
   )
+  
 }
 
 

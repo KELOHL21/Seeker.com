@@ -21,11 +21,11 @@ const EditBtn = ({onEdit, currentUser }) => {
 
   return (
    <div className='h-full bg-gray-300 p-5 text-2xl'>
-    <div className="h-[100vh] bg-white w-[100%] align-middle mt-[30px] rounded-sm items-center p-4">
+    <div className=" bg-white w-full align-middle my-5 rounded-md items-center p-4">
     <IoMdClose  className='absolute right-[2.54rem] mt-[-0.4rem] hover:text-slate-700 cursor-pointer' onClick={onEdit} size={22}/>
       <div className='flex flex-col justify-center'>
          <div className='my-[5px] '>
-            <label className='text-left lg:ml-[1rem] text-sm tracking-wide font-semibold'>Full Name</label>
+            <label className='text-left text-sm tracking-wide font-semibold'>Full Name</label>
                   <input  
                      type='text'
                      onChange={getInput}
@@ -35,7 +35,7 @@ const EditBtn = ({onEdit, currentUser }) => {
                   />
          </div>
          <div className='my-[5px] '>
-            <label className='text-left lg:ml-[1rem] text-sm tracking-wide font-semibold'>Headline</label>
+            <label className='text-left text-sm tracking-wide font-semibold'>Headline</label>
                   <input  
                      type='text'
                      onChange={getInput}
@@ -46,7 +46,7 @@ const EditBtn = ({onEdit, currentUser }) => {
                   />
          </div>
          <div className='my-[5px] '>
-            <label className='text-left lg:ml-[1rem] text-sm tracking-wide font-semibold'>About Me</label>
+            <label className='text-left text-sm tracking-wide font-semibold'>About Me</label>
             <textarea
                onChange={getInput}
                value={editInput.aboutMe}
@@ -57,7 +57,7 @@ const EditBtn = ({onEdit, currentUser }) => {
             />
          </div>
          <div className='my-[5px] '>
-            <label className='text-left lg:ml-[1rem]  text-sm tracking-wide font-semibold'>Location</label>
+            <label className='text-left  text-sm tracking-wide font-semibold'>Location</label>
                   <input  
                      type='text'
                      onChange={getInput}
@@ -68,7 +68,7 @@ const EditBtn = ({onEdit, currentUser }) => {
                   />
          </div>
          <div className='my-[5px] '>
-            <label className='text-left  lg:ml-[1rem] text-sm tracking-wide font-semibold'>Company</label>
+            <label className='text-left text-sm tracking-wide font-semibold'>Company</label>
                   <input  
                      type='text'
                      onChange={getInput}
@@ -79,7 +79,7 @@ const EditBtn = ({onEdit, currentUser }) => {
                   />
          </div>
          <div className='my-[5px] '>
-            <label className='text-left  lg:ml-[1rem] text-sm tracking-wide font-semibold'>Industry</label>
+            <label className='text-left text-sm tracking-wide font-semibold'>Industry</label>
                   <input  
                      type='text'
                      onChange={getInput}
@@ -90,7 +90,7 @@ const EditBtn = ({onEdit, currentUser }) => {
                   />
          </div>
          <div className='my-[5px] '>
-            <label className='text-left  lg:ml-[1rem] text-sm tracking-wide font-semibold'>Education</label>
+            <label className='text-left text-sm tracking-wide font-semibold'>Education</label>
                   <input  
                      type='text'
                      onChange={getInput}
@@ -101,7 +101,7 @@ const EditBtn = ({onEdit, currentUser }) => {
                   />
          </div>
          <div className='my-[5px] '>
-            <label className='text-left  lg:ml-[1rem]  text-sm tracking-wide font-semibold'>Website</label>
+            <label className='text-left text-sm tracking-wide font-semibold'>Website</label>
                   <input  
                      type='text'
                      onChange={getInput}
@@ -112,7 +112,7 @@ const EditBtn = ({onEdit, currentUser }) => {
                   />
          </div>
          <div className='my-[5px] '>
-            <label className='text-left lg:ml-[1rem] text-sm tracking-wide font-semibold'>Skills</label>
+            <label className='text-left text-sm tracking-wide font-semibold'>Skills</label>
                   <input  
                      type='text'
                      onChange={getInput}

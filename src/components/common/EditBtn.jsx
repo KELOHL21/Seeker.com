@@ -16,7 +16,7 @@ const EditBtn = ({onEdit, currentUser }) => {
 
    const updateProfileData = async () => {
       await editProfile(currentUser.userID, editInput);
-     await  onEdit();
+      await  onEdit();
    }
 
   return (

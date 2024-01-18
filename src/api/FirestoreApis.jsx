@@ -124,33 +124,36 @@ export const likePost = (userId, postId, liked) => {
     }
  }
 
- export const postComment = (postId, comment, timeStamp) => {
+ export const postComment = (postId, comment, timeStamp, name) => {
    try {
       addDoc(commentRef,{
          postId,
          comment,
-         timeStamp
+         timeStamp,
+         name
       })
    } catch (err) {
       console.log(err)
    }
  }
 
- export const getComments = (postId) => {
+ export const getComments = (postId, setComments) => {
    try {
-      let singlePostQuery = query(commentRef, where('postId', '===' ,postId));
+      let singlePostQuery = query(commentRef, where('postId', '==' ,postId));
       onSnapshot(singlePostQuery, (response)=> {
          const comments = response.docs.map((doc) => {
             return{
                id:doc.id,
                // Spreading the data from the doc
-               ...doc.data,
+               ...doc.data(),
             }
-         })
+         });
 
-         console.log(comments)
+         setComments(comments);
+         
       });
+   
    } catch (err) {
       console.log(err)
    }
- }
+ };

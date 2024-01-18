@@ -3,6 +3,7 @@ import { getSinglePost, getSingleUser } from '../../api/FirestoreApis';
 import PostCard from './PostCard';
 import { useLocation } from 'react-router-dom';
 import { HiOutlinePencil } from  'react-icons/hi'
+import { uploadImage as uploadImageAPI } from '../../api/ImageStorage';
 
 
 const ProfileCard = ({currentUser, onEdit}) => {
@@ -10,8 +11,22 @@ const ProfileCard = ({currentUser, onEdit}) => {
   let location = useLocation();
 
   const [allStatus, setAllStatus] = useState([]);
+  const [currentImage, setCurrentImage] = useState({});
+  const [imageLink,setimageLink] = useState('');
 
   const [currentProfile, setCurrentProfile] = useState({});
+
+    // Image Input Function
+    const getImage = (event) => {
+      setCurrentImage(event.target.files[0]);
+    }
+
+
+    const uploadImage = () => {
+      uploadImageAPI(currentImage, imageLink);
+    }
+        
+
 
   useMemo(() => {
     if (location?.state?.id) {
@@ -21,13 +36,20 @@ const ProfileCard = ({currentUser, onEdit}) => {
     if (location?.state?.email) {
       getSingleUser(setCurrentProfile, location?.state?.email);
     }
-  }, []);
+  }, [])
+  
 
   return (
     <div>
 
 
     <div className="bg-slate-100 h-auto max-w-[1200px] m-auto rounded-sm">
+
+     <div>
+      <input type={'file'} onChange={getImage} />
+      <button onClick={uploadImage} className='align-left bg-slate-400 p-1'>Upload</button>
+     </div>
+    
        
        <div className='flex flex-row items-center justify-between  w-[100%]  p-2 rounded-sm'>
 

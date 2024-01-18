@@ -25,7 +25,7 @@ const PostCard = ({ posts, id, }) => {
       <p className='text-[12px] text-gray-400 text-left font-semibold '>{posts.timestamp}</p>
       <p className='text-left font-medium text-sm py-2'>{posts.status}</p>
 
-      <LikeButton userId={currentUser?.userID} postId={posts?.id} />
+      <LikeButton userId={currentUser?.userID} postId={posts?.id} currentUser={currentUser}  />
       
 
     </div>

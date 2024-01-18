@@ -6,31 +6,42 @@ import { getLikesByUser, likePost, postComment, getComments } from "../../api/Fi
 
 
 // Always pass in props using {}
-export default function LikeButton({userId, postId}) {
+export default function LikeButton({userId, postId, currentUser}) {
 
     const [likesCount, setLikesCount] = useState(0);
     const [liked, setLiked] = useState(false);
     const [showComment,setShowComment] = useState(false);
-    const [comment, setComment] = useState('')
+    const [comment, setComment] = useState('');
+
+    // Created to store comments in
+    const [comments, setComments] = useState([]);
 
     const handleLikes = () => {
         likePost(userId, postId, liked); 
     } 
+
     const getComment = (event) => {
             setComment(event.target.value);
     }
 
     const addComment = () => {
-        postComment(postId,comment,getTimeStamp('lll'))
-        // .then(() => {
-        //     setComment('')
-        // })
+        postComment(postId,comment,getTimeStamp('lll'), currentUser?.name);
+        setComment("")
     }
+
+    const toggleCommentSection = () => {
+        setShowComment(!showComment);
+        // Clear the comment input when toggling the comment section
+        if (!showComment) {
+            setComment('');
+        }
+    };
+
     
     // Need this memo to run every time the useri and postid changes
     useMemo(() => {
         getLikesByUser(userId, postId, setLiked, setLikesCount);
-        getComments(postId)
+        getComments(postId,setComments)
     }, [userId, postId]);
 
     return (
@@ -55,7 +66,7 @@ export default function LikeButton({userId, postId}) {
                 </div>
 
                 {/* Comment Section */}
-                <div onClick= {() => setShowComment(true)} className="flex gap-1 items-center">
+                <div onClick= {() => setShowComment(!showComment)} className="flex gap-1 items-center">
                     <div>
                         <AiOutlineComment className="text-blue-500"/>
                     </div>
@@ -68,7 +79,8 @@ export default function LikeButton({userId, postId}) {
 
            {showComment ? (
                 <>
-                   <input onChange={getComment} 
+                   <input 
+                        onChange={getComment} 
                         name ='comment' 
                         placeholder="Add Comment" 
                         value={comment}
@@ -78,15 +90,39 @@ export default function LikeButton({userId, postId}) {
                         className="align-bottom border-2 bg-blue-800 w-fit p-[5px] text-[15px] text-white rounded-full px-5">
                         Add Comment
                     </button>
+                    
+                    {comments.length > 0 ? (
+                        comments.map((comment) => {
+                            return (
+                                <div key={comment.id} className="m-2 bg-slate-200 p-2 rounded-xl border-2 border-slate-300">
+                                    <div className="flex flex-row gap-2 items-center">
+                                        <p className="text-[15px] font-extrabold whitespace-normal">{comment.name}</p>
+                                        <p className="text-[10px] font-medium">{comment.timeStamp}</p>
+                                    </div>
+                                  
+                                    <p className="p-[2px] text-[12px] tracking-tight leading-5">{comment.comment}</p>
+                         
+                                </div>
+                            );
+                        })
+                    ) : (
+                        
+                        <> </> // This part is rendered when comment.length is not greater than 0
+                    )
+                    
+                    }
+
+
                 </>
+
            ): (
             <>
 
             </>
            )}
             
-            
                        
         </div>
     );
+    
 }

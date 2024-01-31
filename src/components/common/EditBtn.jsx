@@ -8,19 +8,19 @@ const EditBtn = ({onEdit, currentUser }) => {
    const [editInput, setEditInput] = useState(currentUser);
 
    const getInput = (event) => {
-      let {name, value} = event.target;
+      let { name, value } = event.target;
       let input = { [name]: value };
       // Tracks the input value as its being typed
       setEditInput({...editInput,...input});
    };
 
    const updateProfileData = async () => {
-      await editProfile(currentUser.userID, editInput);
+      await editProfile(currentUser?.id, editInput);
       await  onEdit();
    }
 
   return (
-   <div className='h-full bg-gray-300 p-5 text-2xl'>
+   <div className='h-[100%] bg-gray-300 p-5 text-2xl'>
     <div className=" bg-white w-full align-middle my-5 rounded-md items-center p-4">
     <IoMdClose  className='absolute right-[2.54rem] mt-[-0.4rem] hover:text-slate-700 cursor-pointer' onClick={onEdit} size={22}/>
       <div className='flex flex-col justify-center'>

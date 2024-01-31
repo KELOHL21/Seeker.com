@@ -12,7 +12,7 @@ const ProfileComp = ({currentUser}) => {
 
   return (
     <>
-    {isEdit ? <EditBtn onEdit={onEdit} currentUser={currentUser} /> : <div className='h-screen w-full bg-gray-300 text-center p-5 text-2xl'>
+    {isEdit ? <EditBtn onEdit={onEdit} currentUser={currentUser} /> : <div className=' h-full bg-gray-300 text-center p-5 text-2xl'>
       <ProfileCard currentUser={currentUser} onEdit={onEdit}/>
     </div> }
     </>

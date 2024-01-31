@@ -25,6 +25,14 @@ export const getStatus = (setAllStatus) => {
    });
 };
 
+export const getUsers = (setAllUsers) => {
+   onSnapshot(userRef,(response) => {
+      setAllUsers(response.docs.map((docs) => {
+         return {...docs.data(), id: docs.id}
+      }));
+   });
+}
+
 export const postuserData = (object) => {
    addDoc(userRef, object)
    .then(() => {})
@@ -37,7 +45,7 @@ export const postuserData = (object) => {
 export const getCurrentUsers = (setCurrentUser) => {
    onSnapshot(userRef,(response) => {
       setCurrentUser(response.docs.map((docs) => {
-         return {...docs.data(), userID: docs.id}
+         return {...docs.data(), id: docs.id}
       }).filter((item) => {
          // So that current user display name will show
          return item.email === localStorage.getItem("userEmail");
@@ -49,17 +57,17 @@ export const getCurrentUsers = (setCurrentUser) => {
 export const editProfile = (userID, payload) => {
    // Getting the current user by ID
    let userToEdit = doc(userRef, userID);
-
+ 
    // Updating doc
    updateDoc(userToEdit, payload)
-   .then(() => {
-      toast.success("Profile updated succesfully")
-   })
-   .catch((err) => {
-      console.log(err);
-   });
-
-}
+     .then(() => {
+       toast.success("Profile updated successfully");
+     })
+     .catch((err) => {
+       console.log(err);
+     });
+ };
+ 
 
 export  const getSinglePost = (setAllStatus, id) => {
    // Making sure the the ids are the same so that the posts can be filtered out when the usersName  is clicked and displayed
@@ -157,3 +165,25 @@ export const likePost = (userId, postId, liked) => {
       console.log(err)
    }
  };
+
+ export const updatePost = (id,status) => {
+      let updateCurrentPost = doc(dbRef, id );
+     
+      try {
+         updateDoc(updateCurrentPost, { status });
+         toast.success("Post updated succesfully")
+      } catch (err) {
+         console.log(err)
+      }
+ }
+
+ export const deletePost = (id) => {
+   let deleteCurrentPost = doc(dbRef, id);
+
+   try {
+      deleteDoc( deleteCurrentPost,);
+      toast.success("Post deleted succesfully")
+   } catch (err) {
+      console.log(err)
+   }
+ }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button,ConfigProvider } from 'antd';
 
-const ModalInput = ({ modalOpen, setModalOpen, sendStatus, setStatus, status }) => {
+const ModalInput = ({ modalOpen, setModalOpen, sendStatus, setStatus, status, isEdit, updateStatus }) => {
 
   return (
     <>
@@ -9,17 +9,24 @@ const ModalInput = ({ modalOpen, setModalOpen, sendStatus, setStatus, status }) 
             title="Share your thoughts"
             centered
             open={modalOpen}
-            onOk={() => setModalOpen(false)}
-            onCancel={() => setModalOpen(false)}
+            // Allows the status thatas already been wrriten to display when edit button is clicked
+            onOk={() => {
+              setStatus("");
+              setModalOpen(false)
+            }}
+            onCancel={() => {
+              setStatus("");
+              setModalOpen(false)
+            }}
             footer ={[
               <Button 
-              onClick={sendStatus}
+              onClick={isEdit ? updateStatus : sendStatus}
               key='submit' 
               type='primary' 
               className=' w-[5rem] text-gray-600' 
               disabled={status.length > 0 ? false : true }
              >
-                Post
+                {isEdit ? "Update" : "Post"}
               </Button>
               
             ]}

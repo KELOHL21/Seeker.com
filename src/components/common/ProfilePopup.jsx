@@ -22,8 +22,8 @@ const ProfilePopup = () => {
         onClick={() =>
           navigate("/profile", {
             state: {
-              id: currentUser?.userID,
-            },
+              id: currentUser?.id,
+            },  
           })
         }
       />

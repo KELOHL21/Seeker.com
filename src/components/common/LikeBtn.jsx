@@ -60,7 +60,7 @@ export default function LikeButton({userId, postId, currentUser}) {
                     <div>
                         {liked ? (<AiFillLike />) : <AiOutlineLike /> }
                     </div>
-                    <p className={liked ? "text-blue-600" : "text-slate-800"}>
+                    <p className={liked ? "bg-gradient-to-r from-rose-700 to-pink-600 inline-block text-transparent bg-clip-text": "text-slate-800"}>
                         <span className="text-[18px]">{liked ? "Liked" : "Like"}</span>
                     </p>
                 </div>
@@ -68,9 +68,9 @@ export default function LikeButton({userId, postId, currentUser}) {
                 {/* Comment Section */}
                 <div onClick= {() => setShowComment(!showComment)} className="flex gap-1 items-center">
                     <div>
-                        <AiOutlineComment className="text-blue-500"/>
+                        <AiOutlineComment className="text-rose-700"/>
                     </div>
-                    <p className={showComment ? "text-blue-500" : "text-black"}>
+                    <p className={showComment ? "bg-gradient-to-r from-rose-700 to-pink-600 inline-block text-transparent bg-clip-text" : "text-black"}>
                         <span className="text-[18px]">Comment</span>
                     </p>  
                 </div>

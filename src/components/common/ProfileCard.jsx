@@ -1,9 +1,10 @@
 import React, {useState, useMemo} from 'react';
-import { getSinglePost, getSingleUser } from '../../api/FirestoreApis';
+import { getSinglePost, getSingleUser, editProfile } from '../../api/FirestoreApis';
 import PostCard from './PostCard';
 import { useLocation } from 'react-router-dom';
 import { HiOutlinePencil } from  'react-icons/hi'
 import { uploadImage as uploadImageAPI } from '../../api/ImageStorage';
+import ImageUploadModal from './ImageUploadModal';
 
 
 const ProfileCard = ({currentUser, onEdit}) => {
@@ -12,9 +13,9 @@ const ProfileCard = ({currentUser, onEdit}) => {
 
   const [allStatus, setAllStatus] = useState([]);
   const [currentImage, setCurrentImage] = useState({});
-  const [imageLink,setimageLink] = useState('');
-
   const [currentProfile, setCurrentProfile] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
+  const [progress,setProgress] = useState(0)
 
     // Image Input Function
     const getImage = (event) => {
@@ -23,9 +24,9 @@ const ProfileCard = ({currentUser, onEdit}) => {
 
 
     const uploadImage = () => {
-      uploadImageAPI(currentImage, imageLink);
-    }
-        
+      uploadImageAPI(currentImage, currentUser.id, setModalOpen, setProgress,setCurrentImage);
+      setCurrentImage({})
+    };
 
 
   useMemo(() => {
@@ -37,24 +38,32 @@ const ProfileCard = ({currentUser, onEdit}) => {
       getSingleUser(setCurrentProfile, location?.state?.email);
     }
   }, [])
-  
 
   return (
     <div>
 
-
+    <ImageUploadModal 
+      modalOpen={modalOpen} 
+      setModalOpen={setModalOpen} 
+      getImage={getImage} 
+      uploadImage={uploadImage}
+      currentImage={currentImage}
+      progress={progress}
+    />
+  
     <div className="bg-slate-100 h-auto max-w-[1200px] m-auto rounded-sm">
-
-     <div>
-      <input type={'file'} onChange={getImage} />
-      <button onClick={uploadImage} className='align-left bg-slate-400 p-1'>Upload</button>
-     </div>
-    
-       
+  
        <div className='flex flex-row items-center justify-between  w-[100%]  p-2 rounded-sm'>
 
           {/* Left side */}
-          <div className='text-left'>
+          <div className='text-left md:p-[5px] cursor-pointer'>
+
+            <img 
+              className="w-[200px] h-[200px] object-cover rounded-full border-2 p-[5px] border-[#cacaca]" 
+              src={currentUser?.imageLink} 
+              alt='profileImg' 
+              onClick={() => setModalOpen(true) }>
+            </img>
 
             <div className='flex flex-row items-center'>
                {/* Name */}
@@ -66,7 +75,7 @@ const ProfileCard = ({currentUser, onEdit}) => {
                 </h3>
 
                 <div>
-                  <HiOutlinePencil className='absolute right-[2.54rem] -mt-[1rem] hover:text-gray-500 cursor-pointer border-2' onClick={onEdit} size={25}/>
+                  <HiOutlinePencil className='absolute right-[2.54rem] -mt-[12rem] hover:text-gray-500 cursor-pointer border-2' onClick={onEdit} size={25}/>
               </div>
             </div>
                
@@ -110,7 +119,7 @@ const ProfileCard = ({currentUser, onEdit}) => {
 
           {/*Right Side Country & education */}
           <div>
-               <p className='text-left pt-2  text-gray-700 mt-5 text-sm font-semibold leading-5 tracking-wide'>
+               <p className='text-left pt-2  text-gray-700 -mt-[6.5rem] text-sm font-semibold leading-5 tracking-wide'>
                   {Object.values(currentProfile).length === 0 
                   ? currentUser.company
                   : currentProfile?.company}

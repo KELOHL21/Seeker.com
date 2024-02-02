@@ -16,6 +16,8 @@ const PostCard = ({ posts, id, getEditData }) => {
     getUsers(setAllUsers);
   }, [])
 
+  console.log(allusers)
+
   return (
     <div className="h-auto bg-white w-[100%] text-left align-middle mt-[30px] rounded-sm items-center p-5" key={id}>
 
@@ -69,7 +71,7 @@ const PostCard = ({ posts, id, getEditData }) => {
       
       
     
-      <p className='text-left font-medium text-sm py-2'>{posts.status}</p>
+      <p className='text-left font-medium text-sm py-2'>{posts?.status}</p>
 
       <LikeButton userId={currentUser?.userID} postId={posts?.id} currentUser={currentUser}  />
       

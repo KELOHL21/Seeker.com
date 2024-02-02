@@ -6,6 +6,7 @@ let dbRef = collection(firestore, 'posts');
 let userRef = collection(firestore, 'users');
 let likeRef = collection(firestore,'likes');
 let commentRef =collection(firestore, 'comments')
+let connectionsRef = collection(firestore,'connections')
 
 export const PostStatus = (object) =>{
 
@@ -187,3 +188,17 @@ export const likePost = (userId, postId, liked) => {
       console.log(err)
    }
  }
+
+ export const addConnection = (userId, targetId,) => {
+   try {
+       // sets doc using a unique id
+       let docConnect = doc(connectionsRef, `${userId}_${targetId}`);
+       setDoc(docConnect, {
+         userId: userId,
+         targetId: targetId
+     });
+     toast.success("Connected Successfully!")
+   } catch (err) {
+       console.log(err);
+   }
+};

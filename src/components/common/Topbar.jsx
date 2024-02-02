@@ -7,7 +7,8 @@ import {
   AiOutlineBell,
   AiOutlineUserSwitch,
 } from 'react-icons/ai';
-import {BsBriefcase} from 'react-icons/bs';
+import {BsBriefcase, } from 'react-icons/bs';
+import {BiGroup} from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import ProfilePopup from './ProfilePopup';
 
@@ -47,6 +48,7 @@ const Topbar = () => {
               <div className='flex flex-row items-start mx-5 space-x-12 '>
                 <AiOutlineSearch size={25} className='react-icon cursor-pointer'/>
                 <AiOutlineHome size={25} className='react-icon cursor-pointer' onClick={() => goToRoute('/home')}/>
+                <BiGroup size={25} className='react-icon cursor-pointer' onClick={() => goToRoute('/connections')}/>
                 <AiOutlineMessage size={25} className='react-icon cursor-pointer'/>
                 <BsBriefcase size={25} className='react-icon cursor-pointer'/>
                 <AiOutlineBell size={25} className='react-icon cursor-pointer'/>

@@ -7,6 +7,7 @@ import googleLogo from '../assets/google.png';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { getUuid } from '../helper/getUuid';
+import userImg from "../assets/user.png"
 
 const RegisterComp = () => {
 
@@ -22,7 +23,9 @@ const RegisterComp = () => {
       postuserData({
       userID:getUuid(),
       name:credentials.name, 
-      email:credentials.email})
+      email:credentials.email,
+      imageLink:userImg,
+    })
       navigate("/home");
       localStorage.setItem('userEmail', res.user.email);
     }catch(err) {

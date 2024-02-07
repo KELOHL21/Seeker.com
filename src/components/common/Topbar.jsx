@@ -44,8 +44,8 @@ const Topbar = () => {
                <img src={seekerLogo} className='h-[5rem]  cursor-pointer'/>
             </div>
 
-            <div className='flex flex-row text-center m-auto justify-between  w-full'>
-              <div className='flex flex-row items-start mx-5 space-x-12 '>
+            <div className='flex flex-row text-center m-auto justify-around w-full'>
+              <div className='flex flex-row items-start mx-5 space-x-6'>
                 <AiOutlineSearch size={25} className='react-icon cursor-pointer'/>
                 <AiOutlineHome size={25} className='react-icon cursor-pointer' onClick={() => goToRoute('/home')}/>
                 <BiGroup size={25} className='react-icon cursor-pointer' onClick={() => goToRoute('/connections')}/>
@@ -57,7 +57,7 @@ const Topbar = () => {
               <AiOutlineUserSwitch 
                 onClick={ handlePopUp}
                 size={25} 
-                className='react-icon cursor-pointer mr-5'
+                className='react-icon cursor-pointer -mr-5'
                 />
               </div>
             </div>

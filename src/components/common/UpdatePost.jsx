@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState, useMemo, useEffect} from 'react';
 import ModalInput from './Modal';
 import { PostStatus, getStatus, updatePost } from '../../api/FirestoreApis';
 import PostCard from './PostCard';
@@ -37,7 +37,6 @@ const UpdatePost = ({ currentUser }) => {
   }
 
   const updateStatus = () => {
-
     updatePost(currentPost.id, status)
     setModalOpen(false);
   }

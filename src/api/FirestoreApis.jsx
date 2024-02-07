@@ -192,13 +192,32 @@ export const likePost = (userId, postId, liked) => {
  export const addConnection = (userId, targetId,) => {
    try {
        // sets doc using a unique id
-       let docConnect = doc(connectionsRef, `${userId}_${targetId}`);
-       setDoc(docConnect, {
-         userId: userId,
-         targetId: targetId
-     });
+       let addDocConnect = doc(connectionsRef, `${userId}_${targetId}`);
+
+       setDoc(addDocConnect, { userId,targetId });
+       
      toast.success("Connected Successfully!")
    } catch (err) {
        console.log(err);
    }
 };
+
+export const getConnections = (userId,targetId, setConnection) => {
+   try {
+
+      // Matching the two postIds for a accurate
+    let connectionsQuery= query(connectionsRef, where("targetId", "==" , targetId))
+
+    onSnapshot(connectionsQuery, (response) => {
+      // likes now contains all ur liked post data from firebase
+      let connections = response.docs.map((doc) => doc.data());
+
+      // Determining which post was liked by which user
+      const isConnection = connections.some((connection) => connection.userId === userId); 
+
+      setConnection(isConnection)
+    })
+    } catch (err) {
+      console.log(err) ;
+    }
+ }

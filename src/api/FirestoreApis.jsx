@@ -167,11 +167,11 @@ export const likePost = (userId, postId, liked) => {
    }
  };
 
- export const updatePost = (id,status) => {
+ export const updatePost = (id,status, postImage) => {
       let updateCurrentPost = doc(dbRef, id );
      
       try {
-         updateDoc(updateCurrentPost, { status });
+         updateDoc(updateCurrentPost, { status, postImage });
          toast.success("Post updated succesfully")
       } catch (err) {
          console.log(err)

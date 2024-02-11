@@ -12,7 +12,7 @@ const HomeLayout = () => {
 
   return (
    <>
-      <Topbar />
+      <Topbar currentUser={currentUser}/>
       <HomePage currentUser={currentUser}/>
    </> 
   )

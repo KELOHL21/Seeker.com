@@ -3,14 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { getCurrentUsers, getUsers, deletePost, getConnections } from '../../api/FirestoreApis';
 import LikeButton from './LikeBtn';
 import { BsPencil, BsTrash } from 'react-icons/bs';
+import { Button, Modal } from 'antd';
 
 const PostCard = ({ posts, id, getEditData }) => {
 
   let navigate = useNavigate();
 
   const [currentUser,setCurrentUser] = useState({});
-  const [allusers,setAllUsers] = useState([]);
-  const [IsConnected,setConnection] = useState(false);
+  const [allusers,setAllUsers] = useState([]);;
+  const [IsConnected,setConnection] = useState(false)
+  const [imageModal, setImageModal] = useState(false)
 
   useMemo(() => {
     getCurrentUsers(setCurrentUser);
@@ -21,8 +23,10 @@ const PostCard = ({ posts, id, getEditData }) => {
     getConnections(currentUser.id, posts.userID, setConnection);
   },[currentUser.id,posts.userID])
 
+  console.log(posts)
+
   return (
-    IsConnected ? (
+    IsConnected || currentUser.id === posts.userID ? (
     <div className="h-auto bg-white w-[100%] text-left align-middle mt-[30px] rounded-sm items-center p-5" key={id}>
 
     <div className='flex justify-between items-center -mt-3'>
@@ -36,6 +40,7 @@ const PostCard = ({ posts, id, getEditData }) => {
              ></img>
          </div>
    
+          {/* Name of person */}
            <div className='p-3'>
                {/* Navigating us to the currentUser via their unique Id and email address */}
                <p className="text-left text-[15px] text-gray-600 font-semibold mb-[-0.8rem] underline cursor-pointer" 
@@ -71,11 +76,29 @@ const PostCard = ({ posts, id, getEditData }) => {
          </div>
 
      </div>
+
+     <div>
+      { posts.postImage ? 
+       <img src={posts.postImage} alt='postImage' onClick={() => {setImageModal(true)}}/> 
+       : <></> 
+      }
+     </div>
      
      <p className='text-left font-medium text-sm py-2'>{posts?.status}</p>
 
      <LikeButton userId={currentUser?.userID} postId={posts?.id} currentUser={currentUser}  />
      
+     <Modal
+        centered
+        open={imageModal}
+        onOk={() => setImageModal(false)}
+        onCancel={() => setImageModal(false)}
+        footer= {[]}
+      >
+
+      <img src={posts.postImage} alt='postImage' onClick={() => {setImageModal(true)}}/> 
+       
+      </Modal>
 
    </div>
 

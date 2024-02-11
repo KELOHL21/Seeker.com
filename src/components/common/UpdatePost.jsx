@@ -4,6 +4,7 @@ import { PostStatus, getStatus, updatePost } from '../../api/FirestoreApis';
 import PostCard from './PostCard';
 import { getTimeStamp } from '../../helper/useMoment';
 import { getUuid } from '../../helper/getUuid';
+import { uploadPostImage } from '../../api/ImageStorage';
 
 
 
@@ -13,7 +14,8 @@ const UpdatePost = ({ currentUser }) => {
   const [allStatus, setAllStatus] = useState([]);
   const [isEdit, setisEdit] = useState(false);
   const [currentPost, setCurrentPost]= useState({});
-  
+  const [postImage,setPostImage]=useState('')
+
   const sendStatus = async () => {
       let object = {
         status:status,
@@ -22,6 +24,7 @@ const UpdatePost = ({ currentUser }) => {
         userName: currentUser.name,
         userID: currentUser.id,
         postId: getUuid(),
+        postImage: postImage,
       }
       await PostStatus(object);
       await setStatus("");
@@ -37,7 +40,7 @@ const UpdatePost = ({ currentUser }) => {
   }
 
   const updateStatus = () => {
-    updatePost(currentPost.id, status)
+    updatePost(currentPost.id, status, postImage)
     setModalOpen(false);
   }
 
@@ -79,6 +82,11 @@ const UpdatePost = ({ currentUser }) => {
         sendStatus = {sendStatus}
         isEdit= {isEdit}
         updateStatus= {updateStatus}
+        uploadPostImage={uploadPostImage}
+        setPostImage={setPostImage}
+        postImage={postImage}
+        currentPost={currentPost}
+        setCurrentPost={setCurrentPost}
       />
 
       <div>

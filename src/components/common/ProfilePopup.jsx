@@ -14,7 +14,7 @@ const ProfilePopup = () => {
   }, []);
 
   return (
-    <div className=' border-2 rounded w-[16rem] flex flex-col justify-center h-[15rem] mt-[4rem] ml-[-16rem] bg-white mr-1 absolute z-[999] items-center'>
+    <div className=' border-2 rounded w-[16rem] flex  flex-col  justify-center h-[15rem] top-[75px] right-[5px] bg-[#ffebee] mr-1 absolute z-[999] items-center drop'>
       <p className="text-center py-2 font-semibold mt-[-1rem]">{currentUser.name}</p>
       <p className="text-[13px] mb-[0.5rem] text-center leading-tight w-[12rem]">{currentUser.headline}</p>
       <Button 

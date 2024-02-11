@@ -31,3 +31,32 @@ export const uploadImage = (file, id, setModalOpen, setProgress, setCurrentImage
         }
     );
 };
+
+
+export const uploadPostImage = (file, setPostImage, setProgress) => {
+    // This is the file we will upload our file to
+    const postImageRef = ref(storage,`postImages/${file.name}`);
+    const uploadTask = uploadBytesResumable(postImageRef, file);
+
+    uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+            // Bytes transferred / bytes available
+            const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            
+            setProgress(progress);
+        },
+        // Logging errors
+        (error) => {
+            console.error(error); // Change 'err' to 'error' here
+        },
+        // Getting our images
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((response) => {
+                setPostImage(response)
+            });
+        }
+    );
+};

@@ -13,7 +13,7 @@ const ProfileLayout = () => {
    },[])
   return (
    <>
-   <TopBar />
+   <TopBar currentUser={currentUser}/>
    <ProfilePage currentUser={currentUser}/>
    </>
   )

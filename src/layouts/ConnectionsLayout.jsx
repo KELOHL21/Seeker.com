@@ -12,7 +12,7 @@ const ConnectionsLayout  = () => {
 
   return (
    <>
-      <Topbar />
+      <Topbar currentUser={currentUser}/>
       <Connections currentUser={currentUser}/>
    </> 
   ) 
